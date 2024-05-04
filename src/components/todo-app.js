@@ -7,9 +7,9 @@ import Context from "../context"
 const TodoApp = () => {
 
     const[todos, setTodos] = React.useState([
-        { id: 1, name: 'Completed task', condition:'completed', completed: true },
-        { id: 2, name: 'Editing task', condition:'editing', completed: false },
-        {id: 3, name: 'Active task', condition:'default', completed: false }
+        { id: 1, name: 'Completed task', condition:'', completed: true, isEditing:false},
+        { id: 2, name: 'Second task', condition:'', completed: false, isEditing:false },
+        {id: 3, name: 'Active task', condition:'', completed: false, isEditing:false }
     ])
 
     function conditionChange(id){
@@ -19,6 +19,24 @@ const TodoApp = () => {
             }
             return todo
         })) 
+    }
+    
+    function editConditionChange(id){
+        setTodos(todos.map((todo) => {
+            if (todo.id == id) {
+                todo.isEditing = !todo.isEditing
+            }
+            console.log(`todo id ${id} is isEditing`);
+        return todo
+        }))
+    }
+
+    function renameTodo(id, value){
+        setTodos(todos.map((todo)=>{
+            if(todo.id == id) todo.name = value 
+            todo.isEditing = false
+            return todo
+        }))
     }
 
     function removeTodo (id){
@@ -34,12 +52,15 @@ const TodoApp = () => {
             completed: false
         }]))
     }
+
+
+
     return (
         <Context.Provider value = {{removeTodo}}>
             <section className="todoapp">
                 <NewTaskForm onCreate = {addTodo}></NewTaskForm>
                 <section className="main">
-                    <TaskList todos = {todos} conditionChange = {conditionChange}/>
+                    <TaskList todos = {todos} conditionChange = {conditionChange} editConditionChange = {editConditionChange} renameTodo = {renameTodo}/>
                     <TodoFooter/>
                 </section>
             </section>
