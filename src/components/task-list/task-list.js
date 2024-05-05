@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Task from '../task/task.js'
+import Context from "../../context.js";
+
+
 
 const TaskList = (props) => {
     return (
     <ul className="todo-list" key="task-list">
         {props.todos.map((todo) => {
-            return <Task todo = {todo} conditionChange={props.conditionChange} editConditionChange = {props.editConditionChange} renameTodo={props.renameTodo}/>
+            return <Task key = {todo.id} todo = {todo} />
         })}
     </ul>
     )
