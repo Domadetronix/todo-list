@@ -1,17 +1,15 @@
-import React, { useContext } from "react";
-import Task from '../task/task.js'
-import Context from "../../context.js";
+import React from 'react';
 
+import Task from '../task/task';
 
-
-const TaskList = (props) => {
-    return (
+function TaskList({ todos }) {
+  return (
     <ul className="todo-list" key="task-list">
-        {props.todos.map((todo) => {
-            return <Task key = {todo.id} todo = {todo} />
-        })}
+      {todos.map((todo) => (
+        <Task key={todo.id} todo={todo} />
+      ))}
     </ul>
-    )
+  );
 }
 
-export default TaskList
+export default TaskList;
