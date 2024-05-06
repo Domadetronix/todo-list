@@ -13,7 +13,7 @@ function TodoFooter() {
           <button
             type="button"
             onClick={() => setSelectedFilter('all')}
-            className={selectedFilter === 'all' ? 'selected : null}
+            className={selectedFilter === 'all' ? 'selected' : null}
           >
             All
           </button>
